@@ -107,6 +107,8 @@ if Code.ensure_loaded?(Plug) do
 
     @impl Plug
     def init(opts) do
+      IO.inspect("init uinta")
+      IO.inspect(opts)
       format = if Keyword.get(opts, :json, false), do: :json, else: :string
 
       %{
@@ -300,6 +302,11 @@ if Code.ensure_loaded?(Plug) do
     defp query_type(_), do: nil
 
     defp should_log_request?(conn, opts) do
+      IO.inspect("should_log_request?")
+      IO.inspect(conn)
+      IO.inspect(opts)
+      IO.inspect(opts.ignored_paths)
+      
       # Log successful request if path is not filtered based on the sampling pool
       # or log all HTTP status >= 300 (usually errors)
       (conn.request_path not in opts.ignored_paths &&
